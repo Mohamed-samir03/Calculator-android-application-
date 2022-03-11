@@ -184,6 +184,11 @@ public class MainActivity extends AppCompatActivity {
                         calc = calc + " / ";
                         operation_insert = true;
                     }
+                    if(!res.isEmpty()){
+                        calc = res + " / ";
+                        res = "";
+                        display_res();
+                    }
                 }
                 display_calc();
             }
@@ -200,6 +205,11 @@ public class MainActivity extends AppCompatActivity {
                     if(operation_insert == false){
                         calc = calc + " * ";
                         operation_insert = true;
+                    }
+                    if(!res.isEmpty()){
+                        calc = res + " * ";
+                        res = "";
+                        display_res();
                     }
                 }
                 display_calc();
@@ -218,6 +228,11 @@ public class MainActivity extends AppCompatActivity {
                         calc = calc + " - ";
                         operation_insert = true;
                     }
+                    if(!res.isEmpty()){
+                        calc = res + " - ";
+                        res = "";
+                        display_res();
+                    }
                 }
                 display_calc();
             }
@@ -234,6 +249,11 @@ public class MainActivity extends AppCompatActivity {
                     if(operation_insert == false){
                         calc = calc + " + ";
                         operation_insert = true;
+                    }
+                    if(!res.isEmpty()){
+                        calc = res + " + ";
+                        res = "";
+                        display_res();
                     }
                 }
                 display_calc();
@@ -263,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(tokens.length <= 2){
                     res = tokens[0];
-                    Toast.makeText(getBaseContext(),"no operation or second number",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),"no operation",Toast.LENGTH_SHORT).show();
                     display_res();
                 }
             }
