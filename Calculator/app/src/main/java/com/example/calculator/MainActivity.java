@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     TextView tv_calc,tv_result;
-    Button bt_AC,bt_hundred,bt_backspace,bt_division,bt_multiplication,bt_subtraction,bt_addition,bt_equal,bt_dot;
+    Button bt_AC,bt_os,bt_backspace,bt_division,bt_multiplication,bt_subtraction,bt_addition,bt_equal,bt_dot;
     Button bt_num0,bt_num1,bt_num2,bt_num3,bt_num4,bt_num5,bt_num6,bt_num7,bt_num8,bt_num9;
     String res,calc;
     boolean dot_insert, operation_insert;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         tv_calc = findViewById(R.id.calc_tv_calc);
         tv_result = findViewById(R.id.calc_tv_result);
         bt_AC = findViewById(R.id.calc_bt_AC);
-        bt_hundred = findViewById(R.id.calc_bt_hundred);
+        bt_os = findViewById(R.id.calc_bt_os);
         bt_backspace = findViewById(R.id.calc_bt_backspace);
         bt_division = findViewById(R.id.calc_bt_division);
         bt_multiplication = findViewById(R.id.calc_bt_multiplication);
@@ -150,17 +150,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bt_hundred.setOnClickListener(new View.OnClickListener() {
+        bt_os.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(res.isEmpty()){
-                    Toast.makeText(getBaseContext(),"no result",Toast.LENGTH_SHORT).show();
-                }else {
-                    double num = Double.parseDouble(res);
-                    num = num /100;
-                    res = Double.toString(num);
-                    display_res();
+                dot_insert = false;
+                if(!calc.isEmpty()){
+                    if(calc.substring(calc.length()-1,calc.length()).equals(".")){
+                        backspace();
+                    }
+                    if(operation_insert == false){
+                        calc = calc + " ^ ";
+                        operation_insert = true;
+                    }
+                    if(!res.isEmpty()){
+                        calc = res + " ^ ";
+                        res = "";
+                        display_res();
+                    }
                 }
+                display_calc();
             }
         });
 
@@ -181,11 +189,11 @@ public class MainActivity extends AppCompatActivity {
                         backspace();
                     }
                     if(operation_insert == false){
-                        calc = calc + " / ";
+                        calc = calc + " ÷ ";
                         operation_insert = true;
                     }
                     if(!res.isEmpty()){
-                        calc = res + " / ";
+                        calc = res + " ÷ ";
                         res = "";
                         display_res();
                     }
@@ -203,11 +211,11 @@ public class MainActivity extends AppCompatActivity {
                         backspace();
                     }
                     if(operation_insert == false){
-                        calc = calc + " * ";
+                        calc = calc + " × ";
                         operation_insert = true;
                     }
                     if(!res.isEmpty()){
-                        calc = res + " * ";
+                        calc = res + " × ";
                         res = "";
                         display_res();
                     }
@@ -266,10 +274,10 @@ public class MainActivity extends AppCompatActivity {
                 String [] tokens = calc.split(" ");
                 if(operation_insert==true && !calc.substring(calc.length()-1,calc.length()).equals(" ")){
                     switch (tokens[1].charAt(0)){
-                        case '/' :
+                        case '÷' :
                             res = Double.toString(Double.parseDouble(tokens[0]) / Double.parseDouble(tokens[2]));
                             break;
-                        case '*' :
+                        case '×' :
                             res = Double.toString(Double.parseDouble(tokens[0]) * Double.parseDouble(tokens[2]));
                             break;
                         case '-' :
@@ -277,6 +285,9 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case '+' :
                             res = Double.toString(Double.parseDouble(tokens[0]) + Double.parseDouble(tokens[2]));
+                            break;
+                        case '^' :
+                            res = Double.toString(Math.pow(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[2])));
                             break;
                     }
                     display_res();
@@ -326,6 +337,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
+    /*
     protected void onStart() {
         super.onStart();
         Toast.makeText(getBaseContext(),"Welcome",Toast.LENGTH_SHORT).show();
@@ -333,6 +346,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(getBaseContext(),"Thanks",Toast.LENGTH_LONG).show();
-    }
+        Toast.makeText(getBaseContext(),"Thanks",Toast.LENGTH_SHORT).show();
+    }*/
 }
