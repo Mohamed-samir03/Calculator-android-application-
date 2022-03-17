@@ -1,4 +1,4 @@
 # Calculator-android-application-
 Simple android calculator using Java
 
-![calc](https://user-images.githubusercontent.com/81251707/157090614-7caa9a22-8869-4b73-991e-73245ac4657a.jpg)
+![Calc](https://user-images.githubusercontent.com/81251707/158811215-1be3140d-84a7-48bd-8642-403f5c1ffd90.PNG)
